@@ -5,7 +5,8 @@ public class ElementsCalc{
     private static Scanner in = new Scanner(System.in);
     public static void main(String[] args){
         System.out.print("Input formula >> ");
-        System.out.println(calcMass(in.nextLine()));
+        String inFormula = in.nextLine();
+        System.out.println(calcMass(inFormula));
     }
 
     private static double calcMass(String formula){
@@ -21,37 +22,47 @@ public class ElementsCalc{
 
     private static Element[] parseElements(String formula){
         int numElements = 0;
-        int[] positions = new int[100];
+        int[] locations = new int[100];
+
+        for(int i = 0; i < locations.length; i++){
+            locations[i] = 999;
+        }
+
+        int counter = 0;
         for(int i = 0; i < formula.length(); i++){
             if(Character.isUpperCase(formula.charAt(i))){
+                locations[counter] = i;
                 numElements++;
-                positions[numElements-1] = i;
+                counter++;
             }else if(Character.isDigit(formula.charAt(i))){
                 numElements += (Integer.parseInt(formula.charAt(i)+"")-1);
             }
         }
-        positions[numElements] = formula.length();
+        locations[counter] = formula.length();
 
         Element[] elements = new Element[numElements];
+        int position = 0;
 
-        for(int i = 0; i < elements.length; i++){
-            String unrefinedString = formula.substring(positions[i], positions[i+1]);
-            String symbol = "";
-            for(int j = 0; j < unrefinedString.length(); j++){
-                if(Character.isAlphabetic(unrefinedString.charAt(j)))
-                    symbol += unrefinedString.charAt(j);
+        for(int i = 0; locations[i] < formula.length(); i++){
+            String element = "";
+            int multiplier = 1;
+
+            for(int j = locations[i]; j < locations[i+1]; j++){
+                if(!Character.isDigit(formula.charAt(j))){ // Character isn't a digit
+                    element += formula.charAt(j);
+                }else{ // Character is a digit
+                    multiplier = Integer.parseInt(formula.charAt(j)+"");
+                    j = locations[i+1]+100;
+                }
             }
 
-            for(int j = 0; j < table.table.length; j++){
-                if(table.table[j].symbol.equals(symbol)){
-                    int num = 1;
-                    for(int n = i; n < i+1; n++){
-                        if(Character.isDigit(formula.charAt(n))){
-                            num = Integer.parseInt(formula.charAt(n)+"");
-                        }
-                    }
-                    for(int n = 0; n < num; n++){
-                        elements[i] = table.table[j];
+            for(int j = 0; j < multiplier; j++){
+                // Figure out what element it is and put them into the elements array
+                for(int n = 0; n < table.table.length; n++){
+                    if(element.equals(table.table[n].symbol)){
+                        elements[position] = table.table[n];
+                        position++;
+                        n = table.table.length+100;
                     }
                 }
             }
