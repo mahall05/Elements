@@ -1,5 +1,5 @@
 public class Tester {
     public static void main(String[] args){
-        Integer.parseInt("Hello");
+        System.out.println(5 % 1);
     }
 }
