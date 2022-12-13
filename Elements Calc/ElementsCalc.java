@@ -99,7 +99,7 @@ public class ElementsCalc{
 
                 for(int i = 0; i < moles.length; i++){
                     if(moles[i] % (int) moles[i] > 0.85){
-                        Math.round(Float.parseFloat(moles[i]+""));
+                        moles[i] = Math.round(Float.parseFloat(moles[i]+""));
                     }else if(moles[i] % (int) moles[i] < .15){
                         moles[i] = (int) moles[i];
                     }
