@@ -7,13 +7,14 @@ import javax.imageio.ImageIO;
 
 public class ImageLoader {
     public class Images{
-        public static BufferedImage board = null;
+        public static BufferedImage element = null;
     
     }
 
     public static void loadImages(){
         try {
-            Images.board = ImageIO.read(new File("Images/element.jpg"));
+            Images.element = ImageIO.read(new File("Images/element.png"));
+            System.out.println("Success");
         } catch (IOException e) {
             System.out.println("Failed to load image");
         }

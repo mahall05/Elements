@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class Main extends Canvas implements Runnable{
@@ -26,9 +27,20 @@ public class Main extends Canvas implements Runnable{
 
         Graphics g = bs.getDrawGraphics();
 
+        int imageX = 268, imageY = 50;
+        BufferedImage element = ImageLoader.Images.element;
+
         /* RENDERING */
-        g.setColor(Color.BLUE);
-        g.fillRect(0, 0, Constants.WIDTH, Constants.HEIGHT);
+        g.setColor(Color.WHITE);
+        g.fillRect(0, 0, Constants.WIDTH, Constants.HEIGHT-200);
+
+        g.setColor(Color.GRAY);
+        g.fillRect(0, Constants.HEIGHT-200, Constants.WIDTH, 300);
+
+        g.drawImage(element, imageX, imageY, null);
+        g.drawImage(element, imageX+element.getWidth()*18, imageY, null);
+        g.drawImage(element, imageX+element.getWidth()*3, imageY+element.getHeight()*8, null);
+        g.drawImage(element, imageX+element.getWidth()*16, imageY+element.getHeight()*8, null);
         /* END RENDERING */
 
         g.dispose();
@@ -36,8 +48,9 @@ public class Main extends Canvas implements Runnable{
     }
 
     public Main(){
+        ImageLoader.loadImages();
         window = new Window(Constants.WIDTH, Constants.HEIGHT, "Monopoly", this);
-        welcomeMenu();
+        //welcomeMenu();
     }
 
     public synchronized void start(){
@@ -89,87 +102,6 @@ public class Main extends Canvas implements Runnable{
         new Main();
     }
 
-    private void welcomeMenu(){
-        boolean quit = false;
-        while(!quit){
-            System.out.println("*********************************");
-            System.out.println("Welcome - Enter desired action:");
-            System.out.println("\t1: Mass Calculator");
-            System.out.println("\t2: Element Information");
-            System.out.println("\t666: Information");
-            System.out.println("\t999: Quit");
-            System.out.print(" >> ");
-            int choice = Integer.parseInt(in.nextLine());
-
-            switch(choice){
-                case(1):
-                    massCalculator();
-                    break;
-                case(2):
-                    elementInformation();
-                    break;
-                case(666):
-                    break;
-                case(999):
-                    quit = true;
-                    break;
-                default:
-                    System.out.println("Invalid choice, please try again");
-                    break;
-            }
-        }
-    }
-
-    private void massCalculator(){
-        boolean quit = false;
-        while(!quit){
-            System.out.println("\n**********************************");
-            System.out.print("Enter chemical formula (or 999 to quit) >> ");
-            String input = in.nextLine();
-
-            if(!input.equals("999")){
-                System.out.println("Molar Mass >> " + calcMass(input) + "g");
-            }else{
-                quit = true;
-            }
-        }
-    }
-
-    private void elementInformation(){
-        boolean quit = false;
-        while(!quit){
-            System.out.println("\n**********************************");
-            System.out.print("Enter element (or 999 to quit) >> ");
-            String input = in.nextLine();
-
-            if(!input.equals("999")){
-                Element element;
-                try{
-                    element = locateElement(Integer.parseInt(input));
-                }catch(NumberFormatException e){
-                    element = locateElement(input);
-                }
-
-                try{
-                    System.out.println("Atomic Number: " + element.atomicNum);
-                    System.out.println("\tSymbol: " + element.symbol);
-                    System.out.println("\tName: " + element.name);
-                    System.out.println("\tAtomic Weight: " + element.weight);
-                    System.out.println("\tProtons: " + element.protons);
-                    System.out.println("\tNeutrons: " + element.neutrons);
-                    System.out.println("\tMelting Point: " + (element.meltingPt == 9999 ? "N/A" : element.meltingPt));
-                    System.out.println("\tBoiling Point: " + (element.boilingPt == 9999 ? "N/A" : element.boilingPt));
-                    System.out.println("\tElectronegetivity: " + element.electronegetivity);
-                    System.out.println((element.name.substring(element.name.length()-3).equals("ine") || element.name.substring(element.name.length()-3).equals("gen")) ? "\tDiatomic" : "\tMonatomic");
-                }catch(NullPointerException e){
-                    System.out.println("Invalid choice, try again");
-                }
-            }else{
-                quit = true;
-            }
-
-        }
-    }
 
     private Element locateElement(String element){
         for(int i = 0; i < table.table.length; i++){
