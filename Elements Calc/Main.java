@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class Main extends Canvas implements Runnable{
-    private static PeriodicTable table = new PeriodicTable();
+    public static PeriodicTable table = new PeriodicTable();
     private static Scanner in = new Scanner(System.in);
 
     private static Window window;
@@ -15,10 +15,10 @@ public class Main extends Canvas implements Runnable{
     private boolean running = false;
 
     private void tick(){
-
+        table.tick();
     }
 
-    private void render(){
+    private void render(int frames){
         BufferStrategy bs = this.getBufferStrategy();
         if(bs == null){
             this.createBufferStrategy(3);
@@ -27,20 +27,19 @@ public class Main extends Canvas implements Runnable{
 
         Graphics g = bs.getDrawGraphics();
 
-        int imageX = 268, imageY = 20;
-        Image element = ImageLoader.Images.element.getScaledInstance(52, 68, 1);
-
         /* RENDERING */
         g.setColor(Color.GRAY);
         g.fillRect(0, 0, Constants.WIDTH, Constants.HEIGHT-200);
 
+        for(int i = 0; i < table.table.length; i++){
+            table.render(g);
+        }
+
         g.setColor(Color.BLACK);
         g.fillRect(0, Constants.HEIGHT-200, Constants.WIDTH, 300);
 
-        g.drawImage(element, imageX, imageY, null);
-        g.drawImage(element, imageX+element.getWidth(null)*18, imageY, null);
-        g.drawImage(element, imageX+element.getWidth(null)*3, imageY+element.getHeight(null)*8, null);
-        g.drawImage(element, imageX+element.getWidth(null)*16, imageY+element.getHeight(null)*8, null);
+        g.drawString(frames+"", 10, 10);
+
         /* END RENDERING */
 
         g.dispose();
@@ -49,8 +48,12 @@ public class Main extends Canvas implements Runnable{
 
     public Main(){
         ImageLoader.loadImages();
-        window = new Window(Constants.WIDTH, Constants.HEIGHT, "Monopoly", this);
+        window = new Window(Constants.WIDTH, Constants.HEIGHT, "Chemistry", this);
         //welcomeMenu();
+    }
+
+    public void moveTable(double scroll){
+        table.scrolling += scroll;
     }
 
     public synchronized void start(){
@@ -87,7 +90,7 @@ public class Main extends Canvas implements Runnable{
                 delta--;
             }
             if(running){
-                render();
+                render(frames);
             }
             frames++;
 

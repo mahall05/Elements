@@ -10,15 +10,13 @@ public class Window extends Canvas{
     private JButton[] buttons = {new JButton("Ok"), new JButton("No")};
 
     public Window(int width, int height, String title, Main game){
-        frame = new JFrame();
         frame = new JFrame(title);
+
+        MyMouseWheelListener mouseWheel = new MyMouseWheelListener(game, this);
 
         for(int i = 0; i < buttons.length; i++){
             frame.add(buttons[i]);
         }
-
-        //MyMouseListener mouseClick = new MyMouseListener(game, this);
-        //KeyInput input = new KeyInput(game);
 
         frame.setPreferredSize(new Dimension(width, height));
         frame.setMaximumSize(new Dimension(width, height));
@@ -31,12 +29,13 @@ public class Window extends Canvas{
 
         frame.add(game);
 
-        buttons[0].setBounds(50, Constants.HEIGHT-200, 200, 100);
-        buttons[1].setBounds(300, Constants.HEIGHT-200, 200, 100);
+        buttons[0].setBounds(50, Constants.HEIGHT-175, 200, 100);
+        buttons[1].setBounds(300, Constants.HEIGHT-175, 200, 100);
 
         //frame.addMouseListener((MouseInputListener) mouseClick);
         //game.addMouseListener(mouseClick);
         //game.addKeyListener(input);
+        game.addMouseWheelListener(mouseWheel);
         game.start();
     }
 

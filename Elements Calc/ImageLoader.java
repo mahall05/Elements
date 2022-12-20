@@ -14,9 +14,7 @@ public class ImageLoader {
     public static void loadImages(){
         try {
             Images.element = ImageIO.read(new File("Images/element.png"));
-            System.out.println("Success");
         } catch (IOException e) {
-            System.out.println("Failed to load image");
         }
     }
 }
