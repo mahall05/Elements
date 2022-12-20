@@ -4,21 +4,89 @@ import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.io.IOException;
 
-import javax.swing.JButton;
-
 public class Main extends Canvas implements Runnable{
     private static PeriodicTable table = new PeriodicTable();
     private static Scanner in = new Scanner(System.in);
 
     private static Window window;
 
+    private Thread thread;
+    private boolean running = false;
+
+    private void tick(){
+
+    }
+
+    private void render(){
+        BufferStrategy bs = this.getBufferStrategy();
+        if(bs == null){
+            this.createBufferStrategy(3);
+            return;
+        }
+
+        Graphics g = bs.getDrawGraphics();
+
+        /* RENDERING */
+        g.setColor(Color.BLUE);
+        g.fillRect(0, 0, Constants.WIDTH, Constants.HEIGHT);
+        /* END RENDERING */
+
+        g.dispose();
+        bs.show();
+    }
+
     public Main(){
         window = new Window(Constants.WIDTH, Constants.HEIGHT, "Monopoly", this);
         welcomeMenu();
     }
 
-    public void start(){
-        
+    public synchronized void start(){
+        thread = new Thread(this);
+        thread.start();
+        running = true;
+    }
+
+    public synchronized void stop(){
+        try{
+            thread.join();
+            running = false;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void run() {
+        // TODO Auto-generated method stub
+        this.requestFocus();
+        long lastTime = System.nanoTime();
+        double amountOfTicks = 60.0;
+        double ns = 1000000000 / amountOfTicks;
+        double delta = 0;
+        long timer = System.currentTimeMillis();
+        int frames = 0;
+        while(running){
+            long now = System.nanoTime();
+            delta += (now - lastTime) / ns;
+            lastTime = now;
+            while(delta >= 1){
+                tick();
+                delta--;
+            }
+            if(running){
+                render();
+            }
+            frames++;
+
+            if(System.currentTimeMillis() - timer > 1000){
+                timer += 1000;
+                frames = 0;
+            }
+        }
+    }
+
+    public static void main(String[] args){
+        new Main();
     }
 
     private void welcomeMenu(){
@@ -119,10 +187,6 @@ public class Main extends Canvas implements Runnable{
         }
     }
 
-    public static void main(String[] args){
-        new Main();
-    }
-
     private double calcMass(String formula){
         double totalMass = 0;
         Element[] elements = parseElements(formula);
@@ -183,11 +247,5 @@ public class Main extends Canvas implements Runnable{
         }
 
         return elements;
-    }
-
-    @Override
-    public void run() {
-        // TODO Auto-generated method stub
-        
     }
 }

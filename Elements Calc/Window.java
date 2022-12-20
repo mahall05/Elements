@@ -6,17 +6,15 @@ import java.awt.event.*;
 
 public class Window extends Canvas{
     public JFrame frame;
-    public JPanel panel;
 
-    private JButton[] buttons = {new JButton("Ok")};
+    private JButton[] buttons = {new JButton("Ok"), new JButton("No")};
 
     public Window(int width, int height, String title, Main game){
-        panel = new JPanel();
         frame = new JFrame();
         frame = new JFrame(title);
 
         for(int i = 0; i < buttons.length; i++){
-            panel.add(buttons[i]);
+            frame.add(buttons[i]);
         }
 
         //MyMouseListener mouseClick = new MyMouseListener(game, this);
@@ -31,12 +29,10 @@ public class Window extends Canvas{
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
-        panel.setLayout(null);
-
-        panel.add(game);
-        frame.add(panel);
+        frame.add(game);
 
         buttons[0].setBounds(50, Constants.HEIGHT-200, 200, 100);
+        buttons[1].setBounds(300, Constants.HEIGHT-200, 200, 100);
 
         //frame.addMouseListener((MouseInputListener) mouseClick);
         //game.addMouseListener(mouseClick);

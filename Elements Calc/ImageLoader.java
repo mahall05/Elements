@@ -13,7 +13,7 @@ public class ImageLoader {
 
     public static void loadImages(){
         try {
-            Images.board = ImageIO.read(new File("Images/board.jpg"));
+            Images.board = ImageIO.read(new File("Images/element.jpg"));
         } catch (IOException e) {
             System.out.println("Failed to load image");
         }
