@@ -1,3 +1,5 @@
 public class Constants {
-    public static final int WIDTH = 1850, HEIGHT = WIDTH / 16 * 9;
+    // perfect element size = 52 x 68
+    public static int scale = 2;
+    public static final int WIDTH = 1500, HEIGHT = WIDTH / 16 * 9;
 }

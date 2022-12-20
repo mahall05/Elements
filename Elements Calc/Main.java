@@ -27,20 +27,20 @@ public class Main extends Canvas implements Runnable{
 
         Graphics g = bs.getDrawGraphics();
 
-        int imageX = 268, imageY = 50;
-        BufferedImage element = ImageLoader.Images.element;
+        int imageX = 268, imageY = 20;
+        Image element = ImageLoader.Images.element.getScaledInstance(52, 68, 1);
 
         /* RENDERING */
-        g.setColor(Color.WHITE);
+        g.setColor(Color.GRAY);
         g.fillRect(0, 0, Constants.WIDTH, Constants.HEIGHT-200);
 
-        g.setColor(Color.GRAY);
+        g.setColor(Color.BLACK);
         g.fillRect(0, Constants.HEIGHT-200, Constants.WIDTH, 300);
 
         g.drawImage(element, imageX, imageY, null);
-        g.drawImage(element, imageX+element.getWidth()*18, imageY, null);
-        g.drawImage(element, imageX+element.getWidth()*3, imageY+element.getHeight()*8, null);
-        g.drawImage(element, imageX+element.getWidth()*16, imageY+element.getHeight()*8, null);
+        g.drawImage(element, imageX+element.getWidth(null)*18, imageY, null);
+        g.drawImage(element, imageX+element.getWidth(null)*3, imageY+element.getHeight(null)*8, null);
+        g.drawImage(element, imageX+element.getWidth(null)*16, imageY+element.getHeight(null)*8, null);
         /* END RENDERING */
 
         g.dispose();
