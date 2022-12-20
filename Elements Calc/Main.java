@@ -1,11 +1,24 @@
 import java.util.Scanner;
 
-public class ElementsCalc{
+import java.awt.*;
+import java.awt.image.BufferStrategy;
+import java.io.IOException;
+
+import javax.swing.JButton;
+
+public class Main extends Canvas implements Runnable{
     private static PeriodicTable table = new PeriodicTable();
     private static Scanner in = new Scanner(System.in);
 
-    public ElementsCalc(){
+    private static Window window;
+
+    public Main(){
+        window = new Window(Constants.WIDTH, Constants.HEIGHT, "Monopoly", this);
         welcomeMenu();
+    }
+
+    public void start(){
+        
     }
 
     private void welcomeMenu(){
@@ -107,7 +120,7 @@ public class ElementsCalc{
     }
 
     public static void main(String[] args){
-        new ElementsCalc();
+        new Main();
     }
 
     private double calcMass(String formula){
@@ -170,5 +183,11 @@ public class ElementsCalc{
         }
 
         return elements;
+    }
+
+    @Override
+    public void run() {
+        // TODO Auto-generated method stub
+        
     }
 }
