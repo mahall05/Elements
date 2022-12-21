@@ -1,4 +1,10 @@
+package Core;
 import java.util.Scanner;
+
+import Constants;
+import Chemistry.Element;
+import Chemistry.ImageLoader;
+import Chemistry.PeriodicTable;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
