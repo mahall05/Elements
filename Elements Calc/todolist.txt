@@ -1,3 +1,6 @@
 click detection opens another window with information
 button at the bottom opens a window to input an element that opens the information window
 calc mass (button at bottom)
+
+max and min scrolling
+stop detecting elements when they're under the bottom bar

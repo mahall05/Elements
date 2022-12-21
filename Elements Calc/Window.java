@@ -13,6 +13,7 @@ public class Window extends Canvas{
         frame = new JFrame(title);
 
         MyMouseWheelListener mouseWheel = new MyMouseWheelListener(game, this);
+        MyMouseListener mouseClick = new MyMouseListener(game, this);
 
         for(int i = 0; i < buttons.length; i++){
             frame.add(buttons[i]);
@@ -33,7 +34,7 @@ public class Window extends Canvas{
         buttons[1].setBounds(300, Constants.HEIGHT-175, 200, 100);
 
         //frame.addMouseListener((MouseInputListener) mouseClick);
-        //game.addMouseListener(mouseClick);
+        game.addMouseListener(mouseClick);
         //game.addKeyListener(input);
         game.addMouseWheelListener(mouseWheel);
         game.start();

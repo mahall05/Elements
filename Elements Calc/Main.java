@@ -6,8 +6,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class Main extends Canvas implements Runnable{
-    public static PeriodicTable table = new PeriodicTable();
-    private static Scanner in = new Scanner(System.in);
+    public PeriodicTable table = new PeriodicTable();
+    private Scanner in = new Scanner(System.in);
 
     private static Window window;
 
@@ -28,7 +28,7 @@ public class Main extends Canvas implements Runnable{
         Graphics g = bs.getDrawGraphics();
 
         /* RENDERING */
-        g.setColor(Color.GRAY);
+        g.setColor(new Color(255, 229, 180));
         g.fillRect(0, 0, Constants.WIDTH, Constants.HEIGHT-200);
 
         for(int i = 0; i < table.table.length; i++){
@@ -53,7 +53,7 @@ public class Main extends Canvas implements Runnable{
     }
 
     public void moveTable(double scroll){
-        table.scrolling += scroll;
+        table.scrolling -= scroll;
     }
 
     public synchronized void start(){
