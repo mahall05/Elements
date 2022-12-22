@@ -58,6 +58,7 @@ public class Element {
         g.drawRect(posX, posY, width, height);
 
 
+        // TODO add variables here to easily change this
         g.setColor(Color.BLUE);
         g.drawString(name, posX+(30-(4*(name.length()-3))), posY+15);
         g.drawString(weight+"", posX+((width/2)-3*((weight+"").length()-1)), posY+90);
@@ -68,14 +69,13 @@ public class Element {
 
         g.setColor(Color.BLACK);
         g.setFont(new Font(g.getFont().getFontName(), Font.PLAIN, 32));
-        g.drawString(symbol, posX+((width/2)-(12*((symbol+"").length()-1))), posY+65);
+        g.drawString(symbol, posX+((width/2-10)-(10*((symbol+"").length()-1))), posY+65);
 
         g.setFont(new Font(g.getFont().getFontName(), Font.PLAIN, 12)); // Reset font back to normal
 
     }
 
-    public void tick(double movement){
-        posY += movement*50;
+    public void tick(){
         if(clicked){
             activeColor = Color.GRAY;
         }else{
@@ -95,10 +95,9 @@ public class Element {
         clicked = false;
     }
 
-    public void move(int x, int y){
+    public void scroll(double amount){
         // TODO MAX AND MIN SCROLLING
-        posX += x;
-        posY += y;
+        posY += amount;
     }
 
     public boolean checkWithinButton(Point point){
