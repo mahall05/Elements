@@ -18,7 +18,7 @@ public class Main extends Canvas implements Runnable{
         table.tick();
     }
 
-    private void render(int frames){
+    private void render(int fps){
         BufferStrategy bs = this.getBufferStrategy();
         if(bs == null){
             this.createBufferStrategy(3);
@@ -29,14 +29,14 @@ public class Main extends Canvas implements Runnable{
 
         /* RENDERING */
         g.setColor(new Color(255, 229, 180));
-        g.fillRect(0, 0, Constants.WIDTH, Constants.HEIGHT-200);
+        g.fillRect(0, 0, Window.WIDTH, Window.HEIGHT-200);
 
         table.render(g);
 
         g.setColor(Color.BLACK);
-        g.fillRect(0, Constants.HEIGHT-200, Constants.WIDTH, 300);
+        g.fillRect(0, Window.HEIGHT-200, Window.WIDTH, 300);
 
-        g.drawString(frames+"", 10, 10);
+        g.drawString(fps+"", 10, 10);
 
         /* END RENDERING */
 
@@ -46,7 +46,7 @@ public class Main extends Canvas implements Runnable{
 
     public Main(){
         ImageLoader.loadImages();
-        window = new Window(Constants.WIDTH, Constants.HEIGHT, "Chemistry", this);
+        window = new Window("Chemistry", this);
         //welcomeMenu();
     }
 
@@ -75,6 +75,7 @@ public class Main extends Canvas implements Runnable{
         double delta = 0;
         long timer = System.currentTimeMillis();
         int frames = 0;
+        int fps = 0;
         while(running){
             long now = System.nanoTime();
             delta += (now - lastTime) / ns;
@@ -84,12 +85,13 @@ public class Main extends Canvas implements Runnable{
                 delta--;
             }
             if(running){
-                render(frames);
+                render(fps);
             }
             frames++;
 
             if(System.currentTimeMillis() - timer > 1000){
                 timer += 1000;
+                fps = frames;
                 frames = 0;
             }
         }

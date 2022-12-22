@@ -5,15 +5,21 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class Window extends Canvas{
-    public JFrame frame;
-
+    public static final int WIDTH = 1500, HEIGHT = WIDTH / 16 * 9;
     private JButton[] buttons = {new JButton("Ok"), new JButton("No")};
 
-    public Window(int width, int height, String title, Main game){
-        frame = new JFrame(title);
+    private Main main;
 
-        MyMouseWheelListener mouseWheel = new MyMouseWheelListener(game, this);
-        MyMouseListener mouseClick = new MyMouseListener(game, this);
+    public JFrame frame;
+    public MyMouseWheelListener mouseWheel;
+    public MyMouseListener mouseClick;
+
+    public Window(int width, int height, String title, Main main){
+        this.main = main;
+
+        frame = new JFrame(title);
+        mouseWheel = new MyMouseWheelListener(main, this);
+        mouseClick = new MyMouseListener(main, this);
 
         for(int i = 0; i < buttons.length; i++){
             frame.add(buttons[i]);
@@ -28,16 +34,20 @@ public class Window extends Canvas{
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
-        frame.add(game);
+        frame.add(main);
 
-        buttons[0].setBounds(50, Constants.HEIGHT-175, 200, 100);
-        buttons[1].setBounds(300, Constants.HEIGHT-175, 200, 100);
+        buttons[0].setBounds(50, HEIGHT-175, 200, 100);
+        buttons[1].setBounds(300, HEIGHT-175, 200, 100);
 
         //frame.addMouseListener((MouseInputListener) mouseClick);
-        game.addMouseListener(mouseClick);
+        main.addMouseListener(mouseClick);
         //game.addKeyListener(input);
-        game.addMouseWheelListener(mouseWheel);
-        game.start();
+        main.addMouseWheelListener(mouseWheel);
+        main.start();
+    }
+
+    public Window(String title, Main main){
+        this(WIDTH, HEIGHT, title, main);
     }
 
     public void closeWindow(){

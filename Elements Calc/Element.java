@@ -67,7 +67,7 @@ public class Element {
 
         g.setColor(Color.BLACK);
         g.setFont(new Font(g.getFont().getFontName(), Font.PLAIN, 32));
-        g.drawString(symbol, posX+((width/2)-(12*((symbol+"").length()-1))), posY+65);
+        g.drawString(symbol, posX+((width/2-10)-(10*((symbol+"").length()-1))), posY+65);
 
         g.setFont(new Font(g.getFont().getFontName(), Font.PLAIN, 12)); // Reset font back to normal
 
