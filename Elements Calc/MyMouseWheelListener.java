@@ -4,6 +4,8 @@ public class MyMouseWheelListener implements MouseWheelListener{
     private Main game;
     private Window window;
 
+    private double wheelMovement = 0;
+
     public MyMouseWheelListener(Main game, Window window){
         this.game = game;
         this.window = window;
@@ -11,9 +13,9 @@ public class MyMouseWheelListener implements MouseWheelListener{
 
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
-        // TODO Auto-generated method stub
-        //System.out.println(e.getPreciseWheelRotation());
-        game.moveTable(e.getPreciseWheelRotation());
+        game.table.scroll(-e.getPreciseWheelRotation()/Math.abs(e.getPreciseWheelRotation()));
+
+        //wheelMovement -= e.getPreciseWheelRotation();
     }
     
 }

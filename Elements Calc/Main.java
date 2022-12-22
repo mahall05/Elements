@@ -31,9 +31,7 @@ public class Main extends Canvas implements Runnable{
         g.setColor(new Color(255, 229, 180));
         g.fillRect(0, 0, Constants.WIDTH, Constants.HEIGHT-200);
 
-        for(int i = 0; i < table.table.length; i++){
-            table.render(g);
-        }
+        table.render(g);
 
         g.setColor(Color.BLACK);
         g.fillRect(0, Constants.HEIGHT-200, Constants.WIDTH, 300);
@@ -50,10 +48,6 @@ public class Main extends Canvas implements Runnable{
         ImageLoader.loadImages();
         window = new Window(Constants.WIDTH, Constants.HEIGHT, "Chemistry", this);
         //welcomeMenu();
-    }
-
-    public void moveTable(double scroll){
-        table.scrolling -= scroll;
     }
 
     public synchronized void start(){

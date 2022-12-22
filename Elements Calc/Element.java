@@ -73,8 +73,7 @@ public class Element {
 
     }
 
-    public void tick(double movement){
-        posY += movement*50;
+    public void tick(){
         if(clicked){
             activeColor = Color.GRAY;
         }else{
@@ -94,10 +93,9 @@ public class Element {
         clicked = false;
     }
 
-    public void move(int x, int y){
+    public void scroll(double amount){
         // TODO MAX AND MIN SCROLLING
-        posX += x;
-        posY += y;
+        posY += amount;
     }
 
     public boolean checkWithinButton(Point point){
