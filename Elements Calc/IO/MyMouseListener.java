@@ -1,8 +1,11 @@
+package IO;
 import java.awt.Color;
 import java.awt.Point;
 
 import javax.swing.JComponent;
 import javax.swing.event.MouseInputListener;
+
+import Core.Main;
 
 public class MyMouseListener extends JComponent implements MouseInputListener{
     private Main game;

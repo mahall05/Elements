@@ -1,3 +1,4 @@
+package Chemistry;
 import java.awt.*;
 
 import javax.swing.JDesktopPane;
@@ -57,6 +58,7 @@ public class Element {
         g.drawRect(posX, posY, width, height);
 
 
+        // TODO add variables here to easily change this
         g.setColor(Color.BLUE);
         g.drawString(name, posX+(30-(4*(name.length()-3))), posY+15);
         g.drawString(weight+"", posX+((width/2)-3*((weight+"").length()-1)), posY+90);

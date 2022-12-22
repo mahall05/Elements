@@ -1,3 +1,4 @@
+package Chemistry;
 import java.awt.*;
 
 public class PeriodicTable {

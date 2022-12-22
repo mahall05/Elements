@@ -1,9 +1,12 @@
+package Core;
 import java.util.Scanner;
+
+import Chemistry.Element;
+import Chemistry.PeriodicTable;
+import IO.Window;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 
 public class Main extends Canvas implements Runnable{
     public PeriodicTable table = new PeriodicTable();
@@ -33,7 +36,7 @@ public class Main extends Canvas implements Runnable{
 
         table.render(g);
 
-        g.setColor(Color.BLACK);
+        g.setColor(new Color(211, 211, 211));
         g.fillRect(0, Window.HEIGHT-200, Window.WIDTH, 300);
 
         g.drawString(fps+"", 10, 10);
@@ -45,7 +48,6 @@ public class Main extends Canvas implements Runnable{
     }
 
     public Main(){
-        ImageLoader.loadImages();
         window = new Window("Chemistry", this);
         //welcomeMenu();
     }
