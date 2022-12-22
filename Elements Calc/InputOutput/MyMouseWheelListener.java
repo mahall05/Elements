@@ -2,6 +2,8 @@ package InputOutput;
 
 import java.awt.event.*;
 
+import Core.Main;
+
 public class MyMouseWheelListener implements MouseWheelListener{
     private Main main;
     private Window window;

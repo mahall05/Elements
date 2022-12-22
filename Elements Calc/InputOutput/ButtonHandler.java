@@ -1,4 +1,9 @@
-import java.awt.event.*;;
+package InputOutput;
+import java.awt.event.*;
+
+import javax.swing.JOptionPane;
+
+import Chemistry.Calculator;
 
 public class ButtonHandler implements ActionListener{
     private Calculator calc = new Calculator();
@@ -9,7 +14,8 @@ public class ButtonHandler implements ActionListener{
         String command = e.getActionCommand();
 
         switch(command){
-            case("First"):
+            case("mass"):
+                String formula = JOptionPane.showInputDialog("Enter chemical formula");
                 break;
             case("Second"):
                 break;

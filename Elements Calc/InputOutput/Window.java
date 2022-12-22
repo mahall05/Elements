@@ -8,15 +8,18 @@ import Core.Main;
 
 public class Window extends Canvas{
     private JFrame frame;
-    private JButton[] buttons = {new JButton("Ok"), new JButton("No")};
+    private JButton[] buttons = {new JButton("Calculate Mass"), new JButton("No")};
     private Rectangle[] buttonBounds = {new Rectangle(50, WINDOW_HEIGHT-175, 200, 100), new Rectangle(300, WINDOW_HEIGHT-175, 200 ,100)};
+    private String[] actions = {"mass", null};
+
     private Main main;
 
     private MyMouseListener mouseClick;
     private MyMouseWheelListener mouseWheel;
     private KeyInput keyListener;
+    private ButtonHandler buttonHandler;
 
-    private static final int WINDOW_WIDTH = 1500, WINDOW_HEIGHT = WIDTH/16*9;
+    public static final int WINDOW_WIDTH = 1500, WINDOW_HEIGHT = WIDTH/16*9;
 
     public Window(int width, int height, String title, Main main){
         frame = new JFrame(title);
@@ -24,7 +27,7 @@ public class Window extends Canvas{
 
         setupInput();
 
-        addButtons(buttons);
+        setupButtons();
 
         setupWindow(width, height);
 
@@ -54,9 +57,11 @@ public class Window extends Canvas{
     }
 
     // Call this method if buttons need to be added
-    private void addButtons(JButton[] buttons){
+    private void setupButtons(){
         for(int i = 0; i < buttons.length; i++){
             buttons[i].setBounds(buttonBounds[i]);
+            buttons[i].addActionListener(buttonHandler);
+            buttons[i].setActionCommand(actions[i]);
             frame.add(buttons[i]);
         }
     }

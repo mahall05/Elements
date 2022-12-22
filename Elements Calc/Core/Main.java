@@ -1,10 +1,10 @@
 package Core;
 import java.util.Scanner;
 
-import Constants;
 import Chemistry.Element;
 import Chemistry.ImageLoader;
 import Chemistry.PeriodicTable;
+import InputOutput.Window;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -35,14 +35,14 @@ public class Main extends Canvas implements Runnable{
 
         /* RENDERING */
         g.setColor(new Color(255, 229, 180));
-        g.fillRect(0, 0, Constants.WIDTH, Constants.HEIGHT-200);
+        g.fillRect(0, 0, Window.WINDOW_WIDTH, Window.WINDOW_HEIGHT-200);
 
         for(int i = 0; i < table.table.length; i++){
             table.render(g);
         }
 
         g.setColor(Color.BLACK);
-        g.fillRect(0, Constants.HEIGHT-200, Constants.WIDTH, 300);
+        g.fillRect(0, Window.WINDOW_WIDTH-200, Window.WINDOW_HEIGHT, 300);
 
         g.drawString(frames+"", 10, 10);
 
@@ -54,7 +54,7 @@ public class Main extends Canvas implements Runnable{
 
     public Main(){
         ImageLoader.loadImages();
-        window = new Window(Constants.WIDTH, Constants.HEIGHT, "Chemistry", this);
+        window = new Window("Chemistry", this);
         //welcomeMenu();
     }
 
