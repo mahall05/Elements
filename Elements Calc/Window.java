@@ -14,10 +14,9 @@ public class Window extends Canvas{
 
         MyMouseWheelListener mouseWheel = new MyMouseWheelListener(game, this);
         MyMouseListener mouseClick = new MyMouseListener(game, this);
+        ButtonHandler buttonHandler = new ButtonHandler(game);
 
-        for(int i = 0; i < buttons.length; i++){
-            frame.add(buttons[i]);
-        }
+        setupButtons(buttonHandler);
 
         frame.setPreferredSize(new Dimension(width, height));
         frame.setMaximumSize(new Dimension(width, height));
@@ -30,14 +29,27 @@ public class Window extends Canvas{
 
         frame.add(game);
 
-        buttons[0].setBounds(50, Constants.HEIGHT-175, 200, 100);
-        buttons[1].setBounds(300, Constants.HEIGHT-175, 200, 100);
-
         //frame.addMouseListener((MouseInputListener) mouseClick);
         game.addMouseListener(mouseClick);
         //game.addKeyListener(input);
         game.addMouseWheelListener(mouseWheel);
         game.start();
+    }
+
+    private void setupButtons(ActionListener buttonHandler){
+        buttons[0].setBounds(50, Constants.HEIGHT-175, 200, 100);
+        buttons[0].setActionCommand();
+
+        buttons[1].setBounds(300, Constants.HEIGHT-175, 200, 100);
+        buttons[1].setActionCommand();
+
+        for(int i = 0; i < buttons.length; i++){
+            buttons[i].addActionListener(buttonHandler);
+        }
+
+        for(int i = 0; i < buttons.length; i++){
+            frame.add(buttons[i]);
+        }
     }
 
     public void closeWindow(){
